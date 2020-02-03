@@ -1,0 +1,43 @@
+.answer-container{
+    width: 100%;
+    height: 85vh;
+    margin-top: 3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding: 15px;
+    justify-content: center;
+}
+.answer-flex{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.flex-top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.flex-bottom{
+   text-align: center;
+}
+
+.flex-middle{
+    text-align: center;
+}
+
+@media only screen and (max-width: 700px){
+ 
+    .hideMobile{
+        display: none!important;
+    }
+    .answer-container{
+        margin-top: 1px!important;
+    }
+
+}
