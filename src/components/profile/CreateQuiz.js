@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import CreateBox from './CreateBox';
+import { QuizContext } from '../Context/QuizContext';
+
 const CreateQuiz = () => {
   const [txtVal, setTxtVal] = useState();
+  const [answers, setAnswers] = useState();
   const [ans, setAns] = useState();
-  const [radChoice, setRadChoice] = useState();
+  const { addData } = useContext(QuizContext);
   let arr = [];
+
   const boxes = () => {
     for (let index = 0; index < 4; index++) {
       arr.push(
@@ -21,7 +25,7 @@ const CreateQuiz = () => {
   };
 
   const handleChange = evt => {
-    setTxtVal({ ...txtVal, [evt.target.name]: evt.target.value });
+    setAnswers({ ...answers, [evt.target.name]: evt.target.value });
   };
   const handleAnswer = evt => {
     setAns(evt.target.id);
@@ -29,21 +33,34 @@ const CreateQuiz = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    let ansSel = '';
-    Object.keys(txtVal).forEach(function(key) {
-      if (ans === key) {
-        setRadChoice(txtVal[key]);
-      }
+    let radio,
+      ansCol = [];
+    Object.keys(answers).forEach(function(key) {
+      if (ans === key) radio = answers[key];
+      ansCol.push(answers[key]);
     });
+
+    const content = {
+      question: txtVal,
+      answers: ansCol,
+      correctAns: radio
+    };
+
+    addData(content);
   };
-  console.log(radChoice);
   return (
     <div className="container">
       <div className="row">
-        <div className="col s9">
+        <div className="col s12">
           <form onSubmit={handleSubmit}>
             <div className="row">
-              <input id="question" type="text" className="validate" />
+              <input
+                onChange={evt => setTxtVal(evt.target.value)}
+                id="question"
+                type="text"
+                className="validate"
+                required
+              />
             </div>
             <div className="row">{boxes()}</div>
             <button
@@ -54,7 +71,7 @@ const CreateQuiz = () => {
             </button>
           </form>
         </div>
-        <div className="col s3">{}</div>
+        <div className="col s3">lol</div>
       </div>
     </div>
   );
