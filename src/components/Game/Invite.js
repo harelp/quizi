@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { QuizContext } from '../Context/QuizContext';
 
 const Invite = props => {
@@ -8,6 +8,7 @@ const Invite = props => {
   // //5e24cc914b98ee5eb0fb85aa
   getQuiz(id);
   props.history.push('/play');
+
   return (
     <div
       className="progress"

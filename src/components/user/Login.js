@@ -3,35 +3,34 @@ import axios from 'axios';
 import { UserContext } from './../Context/UserContext';
 import './User.css';
 
+const API_URL = 'http://localhost:5000/api/v1';
+
 const Login = props => {
   const { secureUser } = useContext(UserContext);
   const [input, setInput] = useState({});
 
   const handleSubmit = async evt => {
     evt.preventDefault();
+    const isInputObj = Object.keys(input).length > 0;
 
-    if (Object.keys(input).length > 0) {
-      console.log('lol');
+    if (isInputObj) {
+      const { email, password } = input;
       try {
-        const response = await axios.post(
-          'http://localhost:5000/api/v1/users/login',
-          {
-            email: input.email[0],
-            password: input.password[0]
-          }
-        );
-        console.log(response.data);
+        const response = await axios.post(`${API_URL}/users/login`, {
+          email,
+          password
+        });
         localStorage.setItem('quiziToken', response.data.token);
         secureUser(true);
         props.history.push('/profile');
       } catch (error) {
-        //console.log(error);
+        console.log(error);
       }
     }
   };
 
   const handleChange = evt => {
-    setInput({ ...input, [evt.target.id]: [evt.target.value] });
+    setInput({ ...input, [evt.target.id]: evt.target.value });
   };
   return (
     <div className="container center">

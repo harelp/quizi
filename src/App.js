@@ -5,9 +5,10 @@ import Nav from './components/navbar/Nav';
 import QuizList from './components/quizList/QuizList';
 import GameLayout from './components/Game/GameLayout';
 import Invite from './components/Game/Invite';
-import Profile from './components/user/Profile';
+import Profile from './components/profile/Profile';
 import Register from './components/user/Register';
 import Login from './components/user/Login';
+import CreateQuiz from './components/profile/CreateQuiz';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/Profile" component={Profile} />
               <Route path="/invite" component={Invite} />
+              <Route path="/create" component={CreateQuiz} />
             </Switch>
           </Router>
         </QuizProvider>
