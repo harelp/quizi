@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import CreateBox from './CreateBox';
-import { QuizContext } from '../Context/QuizContext';
+import { QuizContext } from '../../Context/QuizContext';
 
 const CreateQuiz = () => {
   const [txtVal, setTxtVal] = useState();
@@ -8,11 +8,10 @@ const CreateQuiz = () => {
   const [ans, setAns] = useState();
   const { addData } = useContext(QuizContext);
   let arr = [];
-
   const boxes = () => {
     for (let index = 0; index < 4; index++) {
       arr.push(
-        <div className="col s6" key={index}>
+        <div className="col s6 bg-color" key={index}>
           <CreateBox
             name={'ans' + index}
             changeHandler={handleChange}
@@ -49,31 +48,24 @@ const CreateQuiz = () => {
     addData(content);
   };
   return (
-    <div className="container">
+    <form onSubmit={handleSubmit}>
       <div className="row">
-        <div className="col s12">
-          <form onSubmit={handleSubmit}>
-            <div className="row">
-              <input
-                onChange={evt => setTxtVal(evt.target.value)}
-                id="question"
-                type="text"
-                className="validate"
-                required
-              />
-            </div>
-            <div className="row">{boxes()}</div>
-            <button
-              className="btn waves-effect waves-light indigo"
-              type="submit"
-            >
-              Add
-            </button>
-          </form>
+        <div className="input-field col s12">
+          <input
+            onChange={evt => setTxtVal(evt.target.value)}
+            id="question"
+            type="text"
+            className="col 12 validate"
+            required
+          />
+          <label htmlFor="question">I need a fun question here</label>
         </div>
-        <div className="col s3">lol</div>
       </div>
-    </div>
+      <div className="row ">{boxes()}</div>
+      <button className="btn waves-effect waves-light indigo" type="submit">
+        Add
+      </button>
+    </form>
   );
 };
 

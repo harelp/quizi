@@ -29,7 +29,7 @@ export function QuizProvider(props) {
   };
 
   return (
-    <QuizContext.Provider value={{ quiz, content, getQuiz, addData }}>
+    <QuizContext.Provider value={{ quiz, content, getQuiz, newData }}>
       {props.children}
     </QuizContext.Provider>
   );

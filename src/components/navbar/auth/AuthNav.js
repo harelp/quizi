@@ -12,6 +12,9 @@ const AuthNav = ({ children, onLogOut }) => {
       </Link>
       <ul id="nav-mobile" className="right hide-on-med-and-down">
         <li>
+          <Link to="/profile/create">Create</Link>
+        </li>
+        <li>
           <Link to="/profile">Profile</Link>
         </li>
         <li>
