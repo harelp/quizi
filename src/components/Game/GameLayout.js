@@ -55,4 +55,3 @@ export default function GameLayout(props) {
 }
 
 // setup quiz specific leaderboard for every quiz.
-ssssss
