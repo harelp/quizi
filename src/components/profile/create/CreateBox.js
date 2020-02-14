@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 const CreateBox = props => {
+  console.log('box re');
   return (
     <Fragment>
       <p>
