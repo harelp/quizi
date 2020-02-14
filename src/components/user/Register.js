@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { UserContext } from './../Context/UserContext';
 import './User.css';
 
+const API_URL = 'http://localhost:5000/api/v1';
+
 const Register = props => {
+  const { secureUser } = useContext(UserContext);
   const [input, setInput] = useState({});
 
   const handleSubmit = async evt => {
     evt.preventDefault();
+    const isInputObj = Object.keys(input).length > 0;
+    if (isInputObj) {
+      const { nickName, email, password, confirmPassword } = input;
 
-    if (Object.keys(input).length > 0) {
-      const register = input.password[0] === input.confirmPass[0];
+      const register = password === confirmPassword;
       if (register) {
         try {
-          await axios.post('http://localhost:5000/api/v1/users/signup', {
-            nickName: input.name[0],
-            email: input.email[0],
-            password: input.password[0],
-            confirmPassword: input.confirmPass[0]
+          const response = await axios.post(`${API_URL}/users/signup`, {
+            nickName,
+            email,
+            password,
+            confirmPassword
           });
-          setInput({});
-          props.history.push('/login');
+          localStorage.setItem('quiziToken', response.data.token);
+          secureUser(true);
+          props.history.push('/profile');
         } catch (error) {
           console.log(error);
         }
@@ -29,7 +35,7 @@ const Register = props => {
   };
 
   const handleChange = evt => {
-    setInput({ ...input, [evt.target.id]: [evt.target.value] });
+    setInput({ ...input, [evt.target.id]: evt.target.value });
   };
   return (
     <div className="container center">
@@ -49,7 +55,7 @@ const Register = props => {
           <div className="row">
             <div className="input-field col s12">
               <input
-                id="name"
+                id="nickName"
                 type="text"
                 className="validate"
                 minLength="1"
@@ -57,7 +63,7 @@ const Register = props => {
                 required
                 onChange={handleChange}
               />
-              <label htmlFor="name">Nick Name</label>
+              <label htmlFor="nickName">Nick Name</label>
             </div>
           </div>
           <div className="row">
@@ -86,14 +92,14 @@ const Register = props => {
             </div>
             <div className="input-field col s6">
               <input
-                id="confirmPass"
+                id="confirmPassword"
                 type="password"
                 minLength="8"
                 className="validate"
                 required
                 onChange={handleChange}
               />
-              <label htmlFor="confirmPass">Confirm Password</label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
             </div>
           </div>
           <div className="row center">
@@ -102,7 +108,6 @@ const Register = props => {
                 <button
                   className="btn waves-effect indigo btn-large"
                   type="submit"
-                  //   name="action"
                 >
                   Register
                 </button>

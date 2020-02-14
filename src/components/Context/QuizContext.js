@@ -13,7 +13,6 @@ export function QuizProvider(props) {
       );
       setQuiz(response.data);
       setContent(response.data.content);
-      console.log('im here');
     } catch (err) {
       console.log(err);
     }

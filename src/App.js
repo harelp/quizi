@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import { QuizProvider } from './components/Context/QuizContext';
 import { UserProvider } from './components/Context/UserContext';
+import ProtectedRoute from './ProtectedRoute';
 import Nav from './components/navbar/Nav';
 import QuizList from './components/quizList/QuizList';
 import GameLayout from './components/Game/GameLayout';
 import Invite from './components/Game/Invite';
-import Profile from './components/user/Profile';
+import Profile from './components/profile/Profile';
 import Register from './components/user/Register';
 import Login from './components/user/Login';
+import CreateLayout from './components/profile/CreateLayout';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 class App extends Component {
   render() {
     return (
@@ -18,13 +21,18 @@ class App extends Component {
           <Router>
             <Nav />
             <Switch>
-              <Route path="/" exact component={QuizList} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/play" component={GameLayout} />
-              <Route path="/register" component={Register} />
-              <Route path="/login" component={Login} />
-              <Route path="/Profile" component={Profile} />
-              <Route path="/invite" component={Invite} />
+              <Route exact path="/" component={QuizList} />
+
+              <Route exact path="/play" component={GameLayout} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/invite" component={Invite} />
+              <ProtectedRoute exact path="/profile" component={Profile} />
+              <ProtectedRoute
+                exact
+                path="/profile/create"
+                component={CreateLayout}
+              />
             </Switch>
           </Router>
         </QuizProvider>

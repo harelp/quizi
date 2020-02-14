@@ -19,15 +19,13 @@ const quizSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  author: {
-    type: String,
-    trim: true
-  },
   dateCreated: {
     type: String,
     default: date()
   },
-  content: []
+  content: [],
+  userId: String,
+  leaderBoard: []
 });
 
 const Quiz = mongoose.model('Quiz', quizSchema);
