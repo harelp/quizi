@@ -3,11 +3,10 @@ import CreateBox from './CreateBox';
 import { CqContext } from '../CqContext';
 
 const CreateQuiz = props => {
-  const [txtVal, setTxtVal] = useState();
-  // const [reset, setReset] = useState(true);
+  const [question, setQuestion] = useState({ value: '' });
   const [answers, setAnswers] = useState({});
 
-  const [ans, setAns] = useState();
+  const [corrAns, setCorrAns] = useState();
   const { handleData, postData } = useContext(CqContext);
 
   let arr = [];
@@ -30,25 +29,26 @@ const CreateQuiz = props => {
     setAnswers({ ...answers, [evt.target.name]: evt.target.value });
   };
   const handleAnswer = evt => {
-    setAns(evt.target.id);
+    setCorrAns(evt.target.id);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
     let radio,
-      ansCol = [];
+      ansArray = [];
     Object.keys(answers).forEach(function(key) {
-      if (ans === key) radio = answers[key];
-      ansCol.push(answers[key]);
+      if (corrAns === key) radio = answers[key];
+      ansArray.push(answers[key]);
     });
 
     const content = {
-      question: txtVal,
-      answers: ansCol,
+      question: question,
+      answers: ansArray,
       correctAns: radio
     };
 
     handleData(content);
+    setQuestion({ value: '' });
   };
 
   const handleCreate = () => {
@@ -61,7 +61,7 @@ const CreateQuiz = props => {
           <button
             className="btn-floating btn-small waves-effect waves-light red"
             onClick={() => {
-              props.onStep(0);
+              props.onStep(2);
             }}
           >
             <i className="material-icons">arrow_back</i>
@@ -81,11 +81,12 @@ const CreateQuiz = props => {
         <div className="row">
           <div className="input-field col s12">
             <input
-              onChange={evt => setTxtVal(evt.target.value)}
+              onChange={evt => setQuestion({ value: evt.target.value })}
               id="question"
               type="text"
               className="col 12 validate"
               required
+              value={question.value}
             />
             <label htmlFor="question">I need a fun question here</label>
           </div>
