@@ -1,13 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { QuizContext } from '../Context/QuizContext';
 
 const Invite = props => {
-  const { getQuiz } = useContext(QuizContext);
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id');
+  const { content, getQuiz } = useContext(QuizContext);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (content === null) {
+      getQuiz(id);
+    } else {
+      props.history.push('/play');
+    }
+  }, [content]);
+
   // //5e24cc914b98ee5eb0fb85aa
-  getQuiz(id);
-  props.history.push('/play');
   return (
     <div
       className="progress"

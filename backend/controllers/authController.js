@@ -21,13 +21,14 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
   const token = signToken(newUser._id);
 
-  //newUser.password = undefined;
+  newUser.password = undefined;
   res.status(201).json({
     token,
     user: newUser
   });
 });
 
+// login function
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
