@@ -2,8 +2,11 @@ import React, { useState, createContext } from 'react';
 export const UserContext = createContext();
 
 export function UserProvider(props) {
-  const [isAuth, setIsAuth] = useState(true);
-  const [user, setUser] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState(undefined);
+  const [points, setPoints] = useState(null);
+  const [curName, setCurName] = useState();
+
   const secureUser = bool => {
     setIsAuth(bool);
   };
@@ -12,8 +15,33 @@ export function UserProvider(props) {
     setUser(val);
   };
 
+  const handlePoints = () => {
+    if (points === null) {
+      setPoints(1);
+    } else {
+      setPoints(points + 1);
+    }
+  };
+
+  const handleCurName = value => {
+    console.log('hello');
+    console.log(value);
+    setCurName(value);
+  };
+
   return (
-    <UserContext.Provider value={{ isAuth, secureUser, user, setUserData }}>
+    <UserContext.Provider
+      value={{
+        isAuth,
+        secureUser,
+        user,
+        setUserData,
+        handlePoints,
+        points,
+        curName,
+        handleCurName
+      }}
+    >
       {props.children}
     </UserContext.Provider>
   );

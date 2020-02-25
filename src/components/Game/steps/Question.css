@@ -1,8 +1,9 @@
-.question-flex{
-        display: flex;
-        height: 85vh;
-        justify-content: center;
-        align-content: center;
-        flex-direction: column;
-        text-align: center;
-    }
+.question-flex {
+  display: flex;
+  height: 85vh;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+}

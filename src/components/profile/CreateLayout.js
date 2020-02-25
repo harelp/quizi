@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CreateQuiz from './create/CreateQuiz';
+import ConfirmQuiz from './create/ConfirmQuiz';
 import QuizDetails from './create/QuizDetails';
 import ViewQuiz from './view/ViewQuiz';
 import { CqProvider } from './CqContext';
@@ -13,7 +14,7 @@ const CreateLayout = () => {
 
   const stepZero = <QuizDetails onStep={handleStep} />;
   const stepOne = <CreateQuiz onStep={handleStep} />;
-  const stepTwo = 'lol';
+  const stepTwo = <ConfirmQuiz onStep={handleStep} />;
   return (
     <CqProvider>
       <div className="container " style={{ marginTop: '20px' }}>

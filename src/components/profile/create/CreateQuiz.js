@@ -42,13 +42,14 @@ const CreateQuiz = props => {
     });
 
     const content = {
-      question: question,
+      question: question.value,
       answers: ansArray,
       correctAns: radio
     };
 
     handleData(content);
     setQuestion({ value: '' });
+    props.onStep(2);
   };
 
   const handleCreate = () => {
@@ -61,20 +62,20 @@ const CreateQuiz = props => {
           <button
             className="btn-floating btn-small waves-effect waves-light red"
             onClick={() => {
-              props.onStep(2);
+              props.onStep(0);
             }}
           >
             <i className="material-icons">arrow_back</i>
           </button>
         </div>
-        <div className="col s6 right-align">
+        {/* <div className="col s6 right-align">
           <button
             className="btn waves-effect waves-light indigo"
             onClick={handleCreate}
           >
             Create Quiz
           </button>
-        </div>
+        </div> */}
       </div>
 
       <form onSubmit={handleSubmit}>
