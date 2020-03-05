@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import CreateQuiz from './create/CreateQuiz';
 import ConfirmQuiz from './create/ConfirmQuiz';
 import QuizDetails from './create/QuizDetails';
-import ViewQuiz from './view/ViewQuiz';
 import { CqProvider } from './CqContext';
 import './CreateLayout.css';
 
-const CreateLayout = () => {
+const CreateLayout = props => {
   const [step, setStep] = useState(0);
   const handleStep = num => {
     setStep(num);

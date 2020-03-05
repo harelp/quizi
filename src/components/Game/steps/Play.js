@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Name from './Name';
 import Question from './Question';
 import Answers from './Answers';
@@ -7,7 +7,12 @@ import { UserContext } from '../../Context/UserContext';
 
 const Play = props => {
   const { content } = useContext(QuizContext);
-  const { handlePoints, handleCurName } = useContext(UserContext);
+  const { handlePoints, handleCurName, setPoints } = useContext(UserContext);
+  useEffect(() => {
+    return () => {
+      setPoints(0);
+    };
+  }, [setPoints]);
 
   const [step, setStep] = useState(0);
   const [name, setName] = useState('');

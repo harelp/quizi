@@ -6,6 +6,8 @@ const ConfirmQuiz = props => {
   const { postData } = useContext(CqContext);
   const handleCreate = () => {
     postData();
+
+    // console.log(props.history);
     //hashHistory.push('/');
   };
   return (

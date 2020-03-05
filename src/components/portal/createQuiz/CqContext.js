@@ -2,10 +2,9 @@ import React, { createContext, useState } from 'react';
 import axios from 'axios';
 export const CqContext = createContext();
 
-//const API_URL = 'http://localhost:5000/api/v1';
 const API_URL = 'http://localhost:5000/api/v1';
 
-export const CqProvider = ({ children }) => {
+export const CqProvider = props => {
   const [data, setData] = useState([]);
   const [details, setDetails] = useState();
   const [quizName, setQuizName] = useState({ value: '' });
@@ -30,7 +29,6 @@ export const CqProvider = ({ children }) => {
   };
 
   const postData = () => {
-    console.log('cool');
     const DATATOPOST = {
       name: details.name.value,
       description: details.description.value,
@@ -80,7 +78,7 @@ export const CqProvider = ({ children }) => {
         quizDesc
       }}
     >
-      {children}
+      {props.children}
     </CqContext.Provider>
   );
 };

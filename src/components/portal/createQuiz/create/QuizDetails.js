@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { CqContext } from '../CqContext';
-import { UserContext } from '../../Context/UserContext';
+import { UserContext } from './../../../Context/UserContext';
 const QuizDetails = props => {
   const { user } = useContext(UserContext);
   const {

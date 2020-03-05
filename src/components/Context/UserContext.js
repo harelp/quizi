@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 export const UserContext = createContext();
 
 export function UserProvider(props) {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   const [user, setUser] = useState(undefined);
   const [points, setPoints] = useState(null);
   const [curName, setCurName] = useState();
@@ -24,8 +24,6 @@ export function UserProvider(props) {
   };
 
   const handleCurName = value => {
-    console.log('hello');
-    console.log(value);
     setCurName(value);
   };
 
@@ -39,7 +37,8 @@ export function UserProvider(props) {
         handlePoints,
         points,
         curName,
-        handleCurName
+        handleCurName,
+        setPoints
       }}
     >
       {props.children}
