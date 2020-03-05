@@ -8,10 +8,10 @@ import Nav from './components/navbar/Nav';
 import QuizList from './components/quizList/QuizList';
 import GameLayout from './components/Game/GameLayout';
 import Invite from './components/Game/Invite';
-import Profile from './components/profile/Profile';
 import Register from './components/user/Register';
 import Login from './components/user/Login';
-import CreateLayout from './components/profile/CreateLayout';
+import ProfLayout from './components/portal/profile/ProfLayout';
+import CreateLayout from './components/portal/createQuiz/CreateLayout';
 
 class App extends Component {
   render() {
@@ -27,7 +27,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/invite" component={Invite} />
-              <ProtectedRoute exact path="/profile" component={Profile} />
+              <ProtectedRoute exact path="/profile" component={ProfLayout} />
               <ProtectedRoute
                 exact
                 path="/profile/create"

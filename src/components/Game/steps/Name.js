@@ -28,13 +28,16 @@ export default function Name(props) {
     />
   );
   return (
-    <form onSubmit={props.onSubmit} className="col xl12 s12 center">
-      <div className="row cust">{userLogged ? inpTwo : inpOne}</div>
-      <div className="row">
-        <button className="waves-effect indigo btn-200 btn-large">
-          That's Me
-        </button>
-      </div>
-    </form>
+    <div className="container center" style={{ marginTop: '100px' }}>
+      <form onSubmit={props.onSubmit} className="col s12">
+        <h6>Choose a nickname</h6>
+        <div className="row cust">{userLogged ? inpTwo : inpOne}</div>
+        <div className="row">
+          <button className="waves-effect indigo btn-200 btn-large">
+            That's Me
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const nanoid = require('nanoid');
 
 const date = () => {
   var today = new Date();
@@ -11,6 +12,10 @@ const date = () => {
 
 // schema = boilerplate for quiz collection
 const quizSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    default: () => nanoid(4)
+  },
   name: {
     type: String,
     trim: true //removes white spaces from start and the end
