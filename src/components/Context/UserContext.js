@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 export const UserContext = createContext();
 
 export function UserProvider(props) {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(undefined);
   const [points, setPoints] = useState(null);
   const [curName, setCurName] = useState();
