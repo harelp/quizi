@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../Context/UserContext';
 const CurUser = () => {
-  const { curName, points } = useContext(UserContext);
+  const { points } = useContext(UserContext);
   const checkPoints = points !== null;
   return (
     <div className="row">

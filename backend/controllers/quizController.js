@@ -2,7 +2,9 @@ const Quiz = require('./../models/quizModel'); // import for quiz
 
 exports.getAllQuizzes = async (req, res) => {
   try {
-    const quizzes = await Quiz.find();
+    const quizzes = await Quiz.find()
+      .where('private')
+      .equals(false);
     quizzes.map(el => {
       if (el.userId) {
         el.userId = undefined;

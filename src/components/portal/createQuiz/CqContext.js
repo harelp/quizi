@@ -9,6 +9,7 @@ export const CqProvider = props => {
   const [details, setDetails] = useState();
   const [quizName, setQuizName] = useState({ value: '' });
   const [quizDesc, setQuizDesc] = useState({ value: '' });
+  const [quizCheck, setQuizCheck] = useState(false);
 
   /// handle form 1 state
   const handleQuizName = evt => {
@@ -33,6 +34,7 @@ export const CqProvider = props => {
       name: details.name.value,
       description: details.description.value,
       userId: details.userId,
+      private: details.private,
       content: data
     };
     axios
@@ -75,7 +77,9 @@ export const CqProvider = props => {
         handleQuizName,
         handleQuizDesc,
         quizName,
-        quizDesc
+        quizDesc,
+        quizCheck,
+        setQuizCheck
       }}
     >
       {props.children}

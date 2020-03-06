@@ -8,7 +8,9 @@ const QuizDetails = props => {
     handleQuizName,
     handleQuizDesc,
     quizName,
-    quizDesc
+    quizDesc,
+    quizCheck,
+    setQuizCheck
   } = useContext(CqContext);
 
   const nextStep = () => {
@@ -19,6 +21,7 @@ const QuizDetails = props => {
     handleDetails({
       name: quizName,
       description: quizDesc,
+      private: quizCheck,
       userId: user._id
     });
   };
@@ -49,7 +52,20 @@ const QuizDetails = props => {
         </div>
       </div>
       <div className="row">
-        <div className="input-field col s12 right-align">
+        <div className="input-field col s6">
+          <p>
+            <label>
+              <input
+                type="checkbox"
+                className="filled-in"
+                checked={quizCheck}
+                onChange={() => setQuizCheck(!quizCheck)}
+              />
+              <span>Make It Private!</span>
+            </label>
+          </p>
+        </div>
+        <div className="input-field col s6 right-align">
           <button
             className="btn waves-effect waves-light indigo"
             onClick={nextStep}

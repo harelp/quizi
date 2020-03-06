@@ -52,9 +52,6 @@ const CreateQuiz = props => {
     props.onStep(2);
   };
 
-  const handleCreate = () => {
-    postData();
-  };
   return (
     <React.Fragment>
       <div className="row">

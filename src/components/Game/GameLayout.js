@@ -5,13 +5,17 @@ import './steps/Answers.css';
 import LeaderBoardLayout from './lb/LeaderBoardLayout';
 
 export default function GameLayout(props) {
+  console.log(props.history);
+  const handleGameSubmit = () => {
+    props.history.push('/');
+  };
   return (
     <div className="row" style={{ height: '85vh' }}>
       <div className="col l2 s12 hideMobile">
         <LeaderBoardLayout />
       </div>
       <div className="col l10 s12">
-        <Play />
+        <Play redirect={handleGameSubmit} />
       </div>
     </div>
   );

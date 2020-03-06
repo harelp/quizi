@@ -10,9 +10,9 @@ import GameLayout from './components/Game/GameLayout';
 import Invite from './components/Game/Invite';
 import Register from './components/user/Register';
 import Login from './components/user/Login';
-import ProfLayout from './components/portal/profile/ProfLayout';
+import PortalLayout from './components/portal/PortalLayout';
 import CreateLayout from './components/portal/createQuiz/CreateLayout';
-
+import EditUserLayout from './components/portal/editUser/EditUserLayout';
 class App extends Component {
   render() {
     return (
@@ -27,12 +27,22 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/invite" component={Invite} />
-              <ProtectedRoute exact path="/profile" component={ProfLayout} />
+              <ProtectedRoute exact path="/profile" component={PortalLayout} />
               <ProtectedRoute
                 exact
                 path="/profile/create"
                 component={CreateLayout}
               />
+              <Route
+                exact
+                path="/profile/editUser"
+                component={EditUserLayout}
+              />
+              {/* <ProtectedRoute
+                exact
+                path="/profile/editUser"
+                component={EditUserLayout}
+              /> */}
             </Switch>
           </Router>
         </QuizProvider>

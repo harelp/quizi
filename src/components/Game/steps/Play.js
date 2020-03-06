@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import Name from './Name';
 import Question from './Question';
 import Answers from './Answers';
+import GameEnd from './GameEnd';
 import { QuizContext } from '../../Context/QuizContext';
 import { UserContext } from '../../Context/UserContext';
 
@@ -32,7 +33,9 @@ const Play = props => {
   const handleUpdate = () => {
     setStep(step + 1);
   };
-
+  const handleRestart = props => {
+    setStep(0);
+  };
   // helly's code
   const handleCalc = () => {
     handlePoints();
@@ -44,7 +47,6 @@ const Play = props => {
     if (qNum === ansArrLen) {
       setqNum(0);
       setStep(4);
-      console.log('i got in');
     } else {
       setqNum(qNum + 1);
       setStep(1);
@@ -58,6 +60,9 @@ const Play = props => {
   const stepTwo = (
     <Answers qNum={qNum} onCalc={handleCalc} onReset={handleReset} />
   );
+  const stepDefault = (
+    <GameEnd restart={handleRestart} redirect={props.redirect} />
+  );
   switch (step) {
     case 0:
       return stepZero;
@@ -67,7 +72,7 @@ const Play = props => {
     case 2:
       return stepTwo;
     default:
-      return 'GameEnd';
+      return stepDefault;
   }
 };
 
