@@ -28,13 +28,20 @@ exports.updateUser = catchAsync(async (req, res, next) => {
       message: 'Contact admin'
     });
   }
-  const filteredBody = filterObj(req.body, 'nickName', 'email');
-
-  const user = await User.findByIdAndUpdate(
-    '5e6140dca3ad5626a4273460',
-    filteredBody,
-    { new: true, runValidators: true }
+  const filteredBody = filterObj(
+    req.body,
+    'nickName',
+    'email',
+    'totalPoints',
+    'completed',
+    'created'
   );
+
+  // console.log(req.body.userId);
+  const user = await User.findByIdAndUpdate(req.body.userId, filteredBody, {
+    new: true,
+    runValidators: true
+  });
 
   res.status(200).json({
     user

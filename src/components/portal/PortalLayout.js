@@ -6,7 +6,6 @@ import Stats from './userStats/Stats';
 import './PortalLayout.css';
 const PortalLayout = () => {
   const { user } = useContext(UserContext);
-
   return (
     <div className="container">
       <div className="row">

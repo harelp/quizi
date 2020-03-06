@@ -12,7 +12,7 @@ import Register from './components/user/Register';
 import Login from './components/user/Login';
 import PortalLayout from './components/portal/PortalLayout';
 import CreateLayout from './components/portal/createQuiz/CreateLayout';
-
+import EditUserLayout from './components/portal/editUser/EditUserLayout';
 class App extends Component {
   render() {
     return (
@@ -33,6 +33,16 @@ class App extends Component {
                 path="/profile/create"
                 component={CreateLayout}
               />
+              <Route
+                exact
+                path="/profile/editUser"
+                component={EditUserLayout}
+              />
+              {/* <ProtectedRoute
+                exact
+                path="/profile/editUser"
+                component={EditUserLayout}
+              /> */}
             </Switch>
           </Router>
         </QuizProvider>

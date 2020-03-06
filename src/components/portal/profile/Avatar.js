@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Avatar = props => {
   const { nickName } = props.user;
   //   const nickName = 'harel peri';
@@ -10,9 +10,12 @@ const Avatar = props => {
         <div className="center avatar">{nickName.charAt(0).toUpperCase()}</div>
       </div>
       <div className="col s4 right-align margin-edit">
-        <button className="btn-floating btn-small waves-effect waves-light red">
+        <Link
+          to="/profile/editUser"
+          className="btn-floating btn-small waves-effect waves-light red"
+        >
           <i className="material-icons">edit</i>
-        </button>
+        </Link>
       </div>
     </div>
   );
