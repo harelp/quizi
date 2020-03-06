@@ -6,7 +6,7 @@ import './User.css';
 const API_URL = 'http://localhost:5000/api/v1';
 
 const Register = props => {
-  const { secureUser } = useContext(UserContext);
+  const { secureUser, setUserData } = useContext(UserContext);
   const [input, setInput] = useState({});
 
   const handleSubmit = async evt => {
@@ -26,6 +26,7 @@ const Register = props => {
           });
           localStorage.setItem('quiziToken', response.data.token);
           secureUser(true);
+          setUserData(response.data.user);
           props.history.push('/profile');
         } catch (error) {
           console.log(error);

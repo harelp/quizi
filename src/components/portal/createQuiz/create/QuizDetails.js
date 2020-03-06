@@ -1,18 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CqContext } from '../CqContext';
-import { UserContext } from '../../Context/UserContext';
+import { UserContext } from './../../../Context/UserContext';
 const QuizDetails = props => {
-  // const [quizName, quizName] = useState();
-  const { handleDetails } = useContext(CqContext);
   const { user } = useContext(UserContext);
+  const {
+    handleDetails,
+    handleQuizName,
+    handleQuizDesc,
+    quizName,
+    quizDesc
+  } = useContext(CqContext);
+
   const nextStep = () => {
-    if (props.quizName === undefined || props.txtVal === undefined) {
+    if (quizName.value.length === 0 || quizDesc.value.length === 0) {
       return alert('Please Input Name or Description');
     }
     props.onStep(1);
     handleDetails({
-      name: props.quizName,
-      description: props.txtVal,
+      name: quizName,
+      description: quizDesc,
       userId: user._id
     });
   };
@@ -23,12 +29,12 @@ const QuizDetails = props => {
         <div className="input-field col s12">
           <small>Quiz Name</small>
           <input
-            onChange={evt => props.onQuizName(evt.target.value)}
+            onChange={handleQuizName}
             id="name"
             type="text"
             className="col 12 validate"
             required
-            value={props.quizName}
+            value={quizName.value}
           />
         </div>
         <div className="input-field col s12">
@@ -36,8 +42,8 @@ const QuizDetails = props => {
           <textarea
             id="textarea1"
             className="materialize-textarea"
-            onChange={evt => props.onTextVal(evt.target.value)}
-            value={props.txtVal}
+            onChange={handleQuizDesc}
+            value={quizDesc.value}
             required
           ></textarea>
         </div>

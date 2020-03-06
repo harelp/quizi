@@ -1,11 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Name from './Name';
 import Question from './Question';
 import Answers from './Answers';
 import { QuizContext } from '../../Context/QuizContext';
+import { UserContext } from '../../Context/UserContext';
 
 const Play = props => {
   const { content } = useContext(QuizContext);
+  const { handlePoints, handleCurName, setPoints } = useContext(UserContext);
+  useEffect(() => {
+    return () => {
+      setPoints(0);
+    };
+  }, [setPoints]);
+
   const [step, setStep] = useState(0);
   const [name, setName] = useState('');
   const [qNum, setqNum] = useState(0);
@@ -13,6 +21,7 @@ const Play = props => {
   // prevents refresh
   const handleSubmit = evt => {
     evt.preventDefault();
+    handleCurName(name);
     setStep(1);
   };
   // input controller
@@ -22,6 +31,11 @@ const Play = props => {
   // Updates the step
   const handleUpdate = () => {
     setStep(step + 1);
+  };
+
+  // helly's code
+  const handleCalc = () => {
+    handlePoints();
   };
 
   // reset's step
@@ -41,7 +55,9 @@ const Play = props => {
     <Name onSubmit={handleSubmit} onChange={handleChange} value={name} />
   );
   const stepOne = <Question qNum={qNum} onUpdate={handleUpdate} />;
-  const stepTwo = <Answers qNum={qNum} onReset={handleReset} />;
+  const stepTwo = (
+    <Answers qNum={qNum} onCalc={handleCalc} onReset={handleReset} />
+  );
   switch (step) {
     case 0:
       return stepZero;
