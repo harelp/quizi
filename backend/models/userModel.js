@@ -33,6 +33,23 @@ const userSchema = new mongoose.Schema({
       },
       message: "Passwords doesn't match"
     }
+  },
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
+  },
+  totalPoints: {
+    type: Number,
+    default: 0
+  },
+  completed: {
+    type: Number,
+    default: 0
+  },
+  created: {
+    type: Number,
+    default: 0
   }
 });
 
@@ -47,6 +64,11 @@ userSchema.pre('save', async function(next) {
 
   //delete confirmPassword because no need to save it on the db
   this.confirmPassword = undefined;
+  next();
+});
+
+userSchema.pre(/^find/, function(next) {
+  this.find({ active: true });
   next();
 });
 

@@ -28,6 +28,10 @@ const quizSchema = new mongoose.Schema({
     type: String,
     default: date()
   },
+  private: {
+    type: Boolean,
+    default: false
+  },
   content: [],
   userId: String,
   leaderBoard: []

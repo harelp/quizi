@@ -69,4 +69,53 @@ exports.login = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.forgotPassword = (req, res, next) => {};
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'There is no user with this email address'
+    });
+  }
+  res.status(200).json({
+    message: 'HAHA'
+  });
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  user.password = req.body.password;
+  user.confirmPassword = req.body.confirmPassword;
+  await user.save();
+  const token = signToken(user._id);
+  user.password = undefined;
+  res.status(200).json({
+    token,
+    user
+  });
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById('5e6140dca3ad5626a4273460').select(
+    '+password'
+  );
+
+  if (!(await user.correctPassword(req.body.currPassword, user.password))) {
+    return res.status(401).json({
+      status: 'fail',
+      message: 'Your current password is wrong'
+    });
+  }
+
+  user.password = req.body.password;
+  user.confirmPassword = req.body.confirmPassword;
+  await user.save();
+  const token = signToken(user._id);
+  user.password = undefined;
+  res.status(200).json({
+    token,
+    user
+  });
+});
