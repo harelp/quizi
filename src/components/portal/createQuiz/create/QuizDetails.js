@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { CqContext } from '../CqContext';
 import { UserContext } from './../../../Context/UserContext';
 const QuizDetails = props => {
@@ -28,6 +28,7 @@ const QuizDetails = props => {
 
   return (
     <div className="container">
+      <h5 className="center">Quiz Details</h5>
       <div className="row">
         <div className="input-field col s12">
           <small>Quiz Name</small>

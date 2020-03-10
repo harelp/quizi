@@ -1,44 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EditDetails from './EditDetails';
 import EditPass from './EditPass';
 import './EditUserLayout.css';
-const EditUserLayout = () => {
-  //   const editDetails = <EditDetails />;
-  //   const editPassword = <EditPass />;
+const EditUserLayout = props => {
+  const [step, setStep] = useState(0);
+
+  const handleStep = num => {
+    setStep(num);
+  };
+
+  const handleRoute = () => {
+    props.history.push('/profile');
+  };
+
+  const editDetails = (
+    <EditDetails onStepChange={handleStep} onRouteChange={handleRoute} />
+  );
+  const editPassword = (
+    <EditPass onStepChange={handleStep} onRouteChange={handleRoute} />
+  );
+
   return (
     <div className="container">
-      <div className="EditLayout">
-        <div className="row">
-          <div className="input-field col s12">
-            <small>Email Address</small>
-            <input
-              id="email"
-              type="email"
-              className="col 12 validate"
-              required
-            />
-          </div>
-          <div className="input-field col s12">
-            <small>Nick Name</small>
-            <input
-              id="email"
-              type="text"
-              className="col 12 validate"
-              required
-            />
-          </div>
+      <div className="row">
+        <div className="col s12">
+          <h5>Edit Profile</h5>
         </div>
-
-        <div className="button_flex">
-          <button className="waves-effect red btn-large">Edit Details</button>
-
-          <button className="waves-effect red btn-large">
-            Change Password
-          </button>
-        </div>
+      </div>
+      <div className="row EditLayout">
+        {step === 0 && editDetails}
+        {step === 1 && editPassword}
       </div>
     </div>
   );
+
+  // switch (step) {
+  //   case 0:
+  //     return (
+  //       <div className="container">
+  //         <div className="EditLayout">{editDetails}</div>
+  //       </div>
+  //     );
+
+  //   case 1:
+  //     return (
+  //       <div className="container">
+  //         <div className="EditLayout">{editPassword}</div>
+  //       </div>
+  //     );
+  //   default:
+  //     break;
+  // }
 };
 
 export default EditUserLayout;

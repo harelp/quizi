@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 export const CqContext = createContext();
 
-const API_URL = 'http://localhost:5000/api/v1';
+// const API_URL = 'http://localhost:5000/api/v1';
 
 export const CqProvider = props => {
   const [data, setData] = useState([]);
@@ -29,23 +29,23 @@ export const CqProvider = props => {
     setDetails(data);
   };
 
-  const postData = () => {
-    const DATATOPOST = {
-      name: details.name.value,
-      description: details.description.value,
-      userId: details.userId,
-      private: details.private,
-      content: data
-    };
-    axios
-      .post(`${API_URL}/quizzes`, DATATOPOST)
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
+  // const postData = () => {
+  //   const DATATOPOST = {
+  //     name: details.name.value,
+  //     description: details.description.value,
+  //     userId: details.userId,
+  //     private: details.private,
+  //     content: data
+  //   };
+  //   axios
+  //     .post(`${API_URL}/quizzes`, DATATOPOST)
+  //     .then(function(response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // };
 
   // const postData = async () => {
   //   const DATATOPOST = {
@@ -70,10 +70,10 @@ export const CqProvider = props => {
   return (
     <CqContext.Provider
       value={{
+        details,
         data,
         handleData,
         handleDetails,
-        postData,
         handleQuizName,
         handleQuizDesc,
         quizName,

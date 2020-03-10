@@ -11,12 +11,23 @@ const CreateLayout = props => {
     setStep(num);
   };
 
+  const handleRoute = () => {
+    props.history.push('/profile');
+  };
+
   const stepZero = <QuizDetails onStep={handleStep} />;
   const stepOne = <CreateQuiz onStep={handleStep} />;
-  const stepTwo = <ConfirmQuiz onStep={handleStep} />;
+  const stepTwo = (
+    <ConfirmQuiz onStep={handleStep} onRouteChange={handleRoute} />
+  );
   return (
     <CqProvider>
-      <div className="container " style={{ marginTop: '20px' }}>
+      <div className="container">
+        <div className="row">
+          <div className="col s12">
+            <h5>Add Quiz</h5>
+          </div>
+        </div>
         <div className="row CreateLayout">
           {step === 0 && stepZero}
           {step === 1 && stepOne}

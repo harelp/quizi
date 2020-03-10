@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { UserContext } from './../Context/UserContext';
 import './User.css';
 
@@ -8,6 +9,7 @@ const API_URL = 'http://localhost:5000/api/v1';
 const Register = props => {
   const { secureUser, setUserData } = useContext(UserContext);
   const [input, setInput] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async evt => {
     evt.preventDefault();
@@ -16,20 +18,31 @@ const Register = props => {
       const { nickName, email, password, confirmPassword } = input;
 
       const register = password === confirmPassword;
-      if (register) {
+
+      if (!register) {
+        toast.error("Passwords don't Match");
+      } else {
         try {
+          setIsLoading(true);
           const response = await axios.post(`${API_URL}/users/signup`, {
             nickName,
             email,
             password,
             confirmPassword
           });
-          localStorage.setItem('quiziToken', response.data.token);
-          secureUser(true);
-          setUserData(response.data.user);
-          props.history.push('/profile');
+          toast.success('Register Successful!', {
+            onClose: () => {
+              localStorage.setItem('quiziToken', response.data.token);
+              secureUser(true);
+              setUserData(response.data.user);
+              props.history.push('/profile');
+            }
+          });
         } catch (error) {
           console.log(error);
+          toast.error('Email already in use!', {
+            onClose: () => setIsLoading(false)
+          });
         }
       }
     }
@@ -38,6 +51,31 @@ const Register = props => {
   const handleChange = evt => {
     setInput({ ...input, [evt.target.id]: evt.target.value });
   };
+
+  const loader = (
+    <div className="preloader-wrapper small active">
+      <div className="spinner-layer spinner-green-only">
+        <div className="circle-clipper left">
+          <div className="circle"></div>
+        </div>
+        <div className="gap-patch">
+          <div className="circle"></div>
+        </div>
+        <div className="circle-clipper right">
+          <div className="circle"></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const btn = (
+    <div className="input-field">
+      <button className="btn waves-effect indigo btn-large" type="submit">
+        Register
+      </button>
+    </div>
+  );
+
   return (
     <div className="container center">
       <h3>Register</h3>
@@ -62,6 +100,7 @@ const Register = props => {
                 minLength="1"
                 maxLength="20"
                 required
+                disabled={isLoading}
                 onChange={handleChange}
               />
               <label htmlFor="nickName">Nick Name</label>
@@ -74,6 +113,7 @@ const Register = props => {
                 type="email"
                 className="validate"
                 required
+                disabled={isLoading}
                 onChange={handleChange}
               />
               <label htmlFor="email">Email Address</label>
@@ -87,6 +127,7 @@ const Register = props => {
                 minLength="8"
                 className="validate"
                 required
+                disabled={isLoading}
                 onChange={handleChange}
               />
               <label htmlFor="password">Password</label>
@@ -98,22 +139,14 @@ const Register = props => {
                 minLength="8"
                 className="validate"
                 required
+                disabled={isLoading}
                 onChange={handleChange}
               />
               <label htmlFor="confirmPassword">Confirm Password</label>
             </div>
           </div>
           <div className="row center">
-            <div className="flexbox">
-              <div className="input-field">
-                <button
-                  className="btn waves-effect indigo btn-large"
-                  type="submit"
-                >
-                  Register
-                </button>
-              </div>
-            </div>
+            <div className="flexbox">{isLoading ? loader : btn}</div>
           </div>
         </form>
       </div>

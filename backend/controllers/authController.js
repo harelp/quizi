@@ -98,9 +98,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  const user = await User.findById('5e6140dca3ad5626a4273460').select(
-    '+password'
-  );
+  const user = await User.findById(req.body.userId).select('+password');
 
   if (!(await user.correctPassword(req.body.currPassword, user.password))) {
     return res.status(401).json({
