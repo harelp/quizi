@@ -7,7 +7,7 @@ const CreateQuiz = props => {
   const [answers, setAnswers] = useState({});
 
   const [corrAns, setCorrAns] = useState();
-  const { handleData, postData } = useContext(CqContext);
+  const { handleData } = useContext(CqContext);
 
   let arr = [];
   const boxes = () => {
@@ -55,7 +55,7 @@ const CreateQuiz = props => {
   return (
     <React.Fragment>
       <div className="row">
-        <div className="col s6">
+        <div className="col s4">
           <button
             className="btn-floating btn-small waves-effect waves-light red"
             onClick={() => {
@@ -65,14 +65,6 @@ const CreateQuiz = props => {
             <i className="material-icons">arrow_back</i>
           </button>
         </div>
-        {/* <div className="col s6 right-align">
-          <button
-            className="btn waves-effect waves-light indigo"
-            onClick={handleCreate}
-          >
-            Create Quiz
-          </button>
-        </div> */}
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -91,7 +83,7 @@ const CreateQuiz = props => {
         </div>
         <div className="row ">{boxes()}</div>
         <div className="row">
-          <div className="col s6">
+          <div className="col s12 right-align">
             <button
               className="btn waves-effect waves-light indigo"
               type="submit"

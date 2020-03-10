@@ -8,9 +8,15 @@
 .inputWidth {
   width: 300px !important;
 }
+.mt-2 {
+  margin-top: 10vh !important;
+}
 
 @media only screen and (max-width: 700px) {
   .inputWidth {
     width: 200px !important;
+  }
+  .mt-2 {
+    margin-top: 0 !important;
   }
 }

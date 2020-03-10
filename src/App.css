@@ -1,3 +1,8 @@
-/* body{
-  background: red;
-} */
+.mt-2 {
+  margin-top: 10vh !important;
+}
+@media only screen and (max-width: 500px) {
+  .mt-2 {
+    margin-top: 0 !important;
+  }
+}

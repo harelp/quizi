@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Play from './steps/Play';
-import axios from 'axios';
 import './steps/Answers.css';
 import LeaderBoardLayout from './lb/LeaderBoardLayout';
 
 export default function GameLayout(props) {
-  console.log(props.history);
   const handleGameSubmit = () => {
     props.history.push('/');
   };
