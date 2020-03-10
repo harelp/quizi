@@ -63,65 +63,63 @@ const Login = props => {
 
   const btn = (
     <div className="input-field">
-      <button className="btn waves-effect indigo btn-large" type="submit">
+      <button className="btn waves-effect indigo btn-medium" type="submit">
         Login
       </button>
     </div>
   );
 
   return (
-    <React.Fragment>
-      <div className="container center">
-        <h3>Login</h3>
-        <div className="row" style={{ marginTop: '25px' }}>
-          <form
-            className="col l12 s12"
-            onSubmit={handleSubmit}
-            style={{
-              background: '#fff',
-              borderRadius: '2px',
-              boxShadow:
-                '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)',
-              padding: '25px 25px 25px 15px '
-            }}
-          >
-            <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">account_circle</i>
-                <input
-                  id="email"
-                  type="email"
-                  className="validate"
-                  disabled={isLoading}
-                  required
-                  onChange={handleChange}
-                />
-                <label htmlFor="email">Email Address</label>
-              </div>
+    <div className="container center">
+      <h3>Login</h3>
+      <div className="row" style={{ marginTop: '25px' }}>
+        <form
+          className="col l12 s12"
+          onSubmit={handleSubmit}
+          style={{
+            background: '#fff',
+            borderRadius: '2px',
+            boxShadow:
+              '0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)',
+            padding: '25px 25px 25px 15px '
+          }}
+        >
+          <div className="row">
+            <div className="input-field col s12">
+              <i className="material-icons prefix">account_circle</i>
+              <input
+                id="email"
+                type="email"
+                className="validate"
+                disabled={isLoading}
+                required
+                onChange={handleChange}
+              />
+              <label htmlFor="email">Email Address</label>
             </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">vpn_key</i>
-                <input
-                  id="password"
-                  type="password"
-                  disabled={isLoading}
-                  minLength="8"
-                  className="validate"
-                  required
-                  onChange={handleChange}
-                />
-                <label htmlFor="password">Password</label>
-              </div>
-              <div className="col s12 right-align">
-                <Link to="/reset">Forgot Password?</Link>
-              </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <i className="material-icons prefix">vpn_key</i>
+              <input
+                id="password"
+                type="password"
+                disabled={isLoading}
+                minLength="8"
+                className="validate"
+                required
+                onChange={handleChange}
+              />
+              <label htmlFor="password">Password</label>
             </div>
-            <div className="row">{isLoading ? loader : btn}</div>
-          </form>
-        </div>
+            <div className="col s12 right-align">
+              <Link to="/reset">Forgot Password?</Link>
+            </div>
+          </div>
+          <div className="row">{isLoading ? loader : btn}</div>
+        </form>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

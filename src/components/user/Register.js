@@ -70,7 +70,7 @@ const Register = props => {
 
   const btn = (
     <div className="input-field">
-      <button className="btn waves-effect indigo btn-large" type="submit">
+      <button className="btn waves-effect indigo btn-medium" type="submit">
         Register
       </button>
     </div>
