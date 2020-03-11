@@ -1,0 +1,26 @@
+.QuizAdd {
+  /* background: linear-gradient(45deg, #615cae, #506fbd); */
+  /* background-color: green; */
+  color: #3949ab;
+  border: 1px dashed #3949ab;
+  opacity: 0.9;
+  cursor: pointer;
+  height: 142.5px;
+  transition: 0.3s all ease-in-out;
+}
+
+.QuizAdd:hover {
+  border: 1px dashed #3949ab;
+  opacity: 1;
+}
+
+.QuizBox {
+  background: linear-gradient(to bottom, #3949ab, #150051);
+  height: 142.5px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.QuizBox:hover {
+  opacity: 0.9;
+}

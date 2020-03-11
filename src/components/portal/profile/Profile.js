@@ -3,8 +3,6 @@ import './Profile.css';
 
 const Profile = props => {
   const { nickName, email } = props.user;
-  // const nickName = 'harel peri';
-  // const email = 'harelperi2@gmail.com';
   return (
     <div className="row center">
       <div className="col s12">

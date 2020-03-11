@@ -59,3 +59,20 @@ exports.upDateQuiz = async (req, res) => {
     });
   }
 };
+
+exports.getQuizByUser = async (req, res) => {
+  try {
+    const quizzes = await Quiz.find({ userId: req.params.id });
+    quizzes.map(el => {
+      if (el.userId) {
+        el.userId = undefined;
+      }
+    });
+    res.status(200).json(quizzes);
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
+};

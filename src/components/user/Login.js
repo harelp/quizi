@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { UserContext } from './../Context/UserContext';
 import { toast } from 'react-toastify';
+import Loader from '../Loader';
 import 'react-toastify/dist/ReactToastify.css';
 import './User.css';
 
@@ -44,22 +45,6 @@ const Login = props => {
   const handleChange = evt => {
     setInput({ ...input, [evt.target.id]: evt.target.value });
   };
-
-  const loader = (
-    <div className="preloader-wrapper small active">
-      <div className="spinner-layer spinner-green-only">
-        <div className="circle-clipper left">
-          <div className="circle"></div>
-        </div>
-        <div className="gap-patch">
-          <div className="circle"></div>
-        </div>
-        <div className="circle-clipper right">
-          <div className="circle"></div>
-        </div>
-      </div>
-    </div>
-  );
 
   const btn = (
     <div className="input-field">
@@ -116,7 +101,7 @@ const Login = props => {
               <Link to="/reset">Forgot Password?</Link>
             </div>
           </div>
-          <div className="row">{isLoading ? loader : btn}</div>
+          <div className="row">{isLoading ? <Loader /> : btn}</div>
         </form>
       </div>
     </div>

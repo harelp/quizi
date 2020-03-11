@@ -5,6 +5,7 @@ export const QuizContext = createContext();
 export function QuizProvider(props) {
   const [quiz, setQuiz] = useState(null);
   const [content, setContent] = useState(null);
+  const [userQuiz, setUserQuiz] = useState(null);
 
   const getQuiz = async id => {
     try {
@@ -17,9 +18,10 @@ export function QuizProvider(props) {
       console.log(err);
     }
   };
-
   return (
-    <QuizContext.Provider value={{ quiz, content, getQuiz }}>
+    <QuizContext.Provider
+      value={{ quiz, content, getQuiz, userQuiz, setUserQuiz }}
+    >
       {props.children}
     </QuizContext.Provider>
   );

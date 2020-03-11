@@ -2,12 +2,13 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { UserContext } from './../../Context/UserContext';
-
+import Loader from '../../Loader';
 const API_URL = 'http://localhost:5000/api/v1';
 
 const EditDetails = props => {
   const [email, setEmail] = useState(' ');
   const [nickName, setNickName] = useState(' ');
+  const [isLoading, setIsLoading] = useState(false);
 
   const { user, setUserData } = useContext(UserContext);
   useEffect(() => {
@@ -21,6 +22,7 @@ const EditDetails = props => {
 
   const handleSubmit = async evt => {
     evt.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.patch(`${API_URL}/users/updateUser`, {
         userId: user._id,
@@ -28,13 +30,18 @@ const EditDetails = props => {
         nickName
       });
       toast.success('Details Changed', {
-        onClose: () => props.onRouteChange()
+        onClose: () => {
+          setIsLoading(false);
+        }
       });
       setUserData(response.data.user);
     } catch (error) {
       toast.error('Unauthorized, Contact Administrator');
+      setIsLoading(false);
     }
   };
+
+  const btn = <button className="waves-effect red btn-small">Save</button>;
 
   return (
     <form className="container" onSubmit={handleSubmit}>
@@ -48,6 +55,7 @@ const EditDetails = props => {
               value={email}
               onChange={evt => setEmail(evt.target.value)}
               className="validate"
+              disabled={isLoading}
               required
             />
           </div>
@@ -64,6 +72,7 @@ const EditDetails = props => {
               minLength="1"
               maxLength="20"
               className="validate"
+              disabled={isLoading}
               onChange={evt => setNickName(evt.target.value)}
               required
             />
@@ -77,12 +86,13 @@ const EditDetails = props => {
               type="button"
               onClick={() => props.onStepChange(1)}
               className="waves-effect black btn-small"
+              disabled={isLoading}
             >
               Change Password
             </button>
           </div>
           <div className="col l6 s4 right-align">
-            <button className="waves-effect red btn-small">Save</button>
+            {isLoading ? <Loader /> : btn}
           </div>
         </div>
       </div>

@@ -1,3 +1,9 @@
-.black-text a , .black-text li a{
+.black-text a,
+.black-text li a {
   color: black;
- }
+}
+
+.nav-ico {
+  color: #3949ab;
+  font-size: 30px !important;
+}

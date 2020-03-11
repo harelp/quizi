@@ -11,7 +11,7 @@ const Avatar = props => {
       </div>
       <div className="col s4 right-align margin-edit">
         <Link
-          to="/profile/editUser"
+          to="/profile/edituser"
           className="btn-floating btn-small waves-effect waves-light red"
         >
           <i className="material-icons">edit</i>

@@ -1,22 +1,6 @@
 import React from 'react';
-
+import Loader from '../../Loader';
 const ResetButtons = props => {
-  const loader = (
-    <div className="preloader-wrapper small active">
-      <div className="spinner-layer spinner-green-only">
-        <div className="circle-clipper left">
-          <div className="circle"></div>
-        </div>
-        <div className="gap-patch">
-          <div className="circle"></div>
-        </div>
-        <div className="circle-clipper right">
-          <div className="circle"></div>
-        </div>
-      </div>
-    </div>
-  );
-
   const btn = (
     <button className="btn waves-effect indigo btn-medium" type="submit">
       {props.step === 0 ? 'Next' : 'Change Password'}
@@ -38,7 +22,7 @@ const ResetButtons = props => {
         {props.step === 1 ? btnTwo : ''}
       </div>
       <div className="col s10 right-align">
-        {props.isLoading ? loader : btn}
+        {props.isLoading ? <Loader /> : btn}
       </div>
     </div>
   );

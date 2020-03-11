@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import './GameEnd.css';
 import { UserContext } from '../../Context/UserContext';
+import { toast } from 'react-toastify';
+import Loader from '../../Loader';
 
+import './GameEnd.css';
 const API_URL = 'http://localhost:5000/api/v1';
 
 const GameEnd = ({ restart, redirect }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { points, isAuth, user, setPoints, setUserData } = useContext(
     UserContext
   );
@@ -17,6 +20,7 @@ const GameEnd = ({ restart, redirect }) => {
   };
 
   const submitScores = async () => {
+    setIsLoading(true);
     const totalPoints = user.totalPoints + points;
     const completed = user.completed + 1;
     try {
@@ -26,12 +30,26 @@ const GameEnd = ({ restart, redirect }) => {
         completed
       });
       setUserData(response.data.user);
-      redirect();
+      toast.success('Awesome!!', {
+        onClose: () => {
+          redirect();
+        }
+      });
     } catch (error) {
-      console.log(error);
+      toast.error('Pleas Try Again', {
+        onClose: () => setIsLoading(false)
+      });
     }
   };
 
+  const btn = isAuth && (
+    <button
+      className="waves-effect blue darken-1 btn-large"
+      onClick={submitScores}
+    >
+      Submit Score
+    </button>
+  );
   return (
     <div className="GameEnd_flex">
       <h5 style={{ marginBottom: '50px' }}>
@@ -39,17 +57,15 @@ const GameEnd = ({ restart, redirect }) => {
         Points
       </h5>
       <div className="button_flex">
-        <button className="waves-effect red btn-large" onClick={handleRestart}>
+        <button
+          className="waves-effect red btn-large"
+          disable={isLoading}
+          onClick={handleRestart}
+        >
           <i className="material-icons left">refresh</i>Restart
         </button>
-        {isAuth && (
-          <button
-            className="waves-effect blue darken-1 btn-large"
-            onClick={submitScores}
-          >
-            Submit Score
-          </button>
-        )}
+
+        {isLoading ? <Loader /> : btn}
       </div>
     </div>
   );

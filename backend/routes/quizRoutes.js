@@ -4,14 +4,13 @@ const quizController = require('./../controllers/quizController');
 const router = express.Router();
 
 // router.param('id', tourController.checkID);
+router.get('/quiz/:id', quizController.getQuizByUser);
 router
-    .route('/')
-    .get(quizController.getAllQuizzes)
-    .post(quizController.createQuiz);
+  .route('/')
+  .get(quizController.getAllQuizzes)
+  .post(quizController.createQuiz);
 
-router
-    .route('/:id')
-    .get(quizController.getQuiz)
+router.route('/:id').get(quizController.getQuiz);
 //     .patch()
 //     .delete();
 
