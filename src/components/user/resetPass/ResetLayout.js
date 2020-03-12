@@ -64,7 +64,7 @@ const ResetLayout = props => {
 
   return (
     <div className="container center">
-      <h3>Login</h3>
+      <h3>Reset Password</h3>
       <div className="flex">
         <form className="test" onSubmit={handleSubmit}>
           <div className="row">
