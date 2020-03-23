@@ -1,19 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { QuizContext } from '../../Context/QuizContext';
+import React, { useContext } from 'react';
+import { EditQuizProvider } from './EditQuizContext';
+import EditingLayout from './editing/EditingLayout';
+
 const EditQuizLayout = props => {
-  const { userQuiz } = useContext(QuizContext);
-  const [quiz, setQuiz] = useState(null);
-  useEffect(() => {
-    const filteQuiz = userQuiz.filter(quiz => {
-      return quiz._id === props.location.state.id;
-    });
-
-    setQuiz(filteQuiz);
-  }, []);
-
-  console.log(props.location.state.id);
-  console.log(quiz);
-  return 'editquiz';
+  const RedirectQuiz = () => {
+    props.history.push('/profile/quizzes');
+  };
+  return (
+    <EditQuizProvider>
+      <EditingLayout
+        quizId={props.location.state.id}
+        RedirectQuiz={RedirectQuiz}
+      />
+    </EditQuizProvider>
+  );
 };
 
 export default EditQuizLayout;

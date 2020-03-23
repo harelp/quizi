@@ -55,9 +55,9 @@ const QuizLayout = props => {
         </div>
       </div>
       <div className="row">
-        <div className="col l12 12">
-          {quizList}
+        <div className="col l12 s12 padNone">
           <QuizAdd directToCreate={directToCreate} />
+          {quizList}
         </div>
       </div>
     </div>

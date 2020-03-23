@@ -10,8 +10,17 @@ router
   .get(quizController.getAllQuizzes)
   .post(quizController.createQuiz);
 
-router.route('/:id').get(quizController.getQuiz);
-//     .patch()
+router
+  .route('/:id')
+  .get(quizController.getQuiz)
+  .patch(quizController.updateDetailsOnQuiz)
+  .delete(quizController.deleteQuiz)
+  .post(quizController.addQuestion);
+
+router
+  .route('/:id/:cId')
+  .patch(quizController.updateQuestionOnQuiz)
+  .post(quizController.deleteQuestion);
 //     .delete();
 
 module.exports = router;

@@ -1,0 +1,38 @@
+.QuizEdit {
+  /* background: linear-gradient(45deg, #615cae, #506fbd); */
+  /* background-color: green; */
+  color: #3949ab;
+  border: 1px dashed #3949ab;
+
+  opacity: 0.9;
+  cursor: pointer;
+  height: 142.5px;
+  transition: 0.3s all ease-in-out;
+}
+
+.QuizEdit i {
+  font-size: 65px;
+}
+
+.QuizEdit:hover {
+  border: 1px dashed #3949ab;
+  opacity: 1;
+}
+.editFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 760px) {
+  .QuizEdit {
+    height: 131px;
+  }
+  .QuizEdit i {
+    font-size: 34px;
+  }
+}
+
+.row .padNone {
+  padding: 0 !important;
+}
