@@ -13,7 +13,7 @@ const EditButtons = props => {
             </button>
           )}
         </div>
-        <div className="col l1 s6 right">
+        <div className="col s6 right">
           <button
             className="waves-effect black btn-small"
             type="button"

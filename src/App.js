@@ -60,7 +60,7 @@ class App extends Component {
                 path="/profile/quizzes"
                 component={QuizLayout}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/profile/editquiz"
                 component={EditQuizLayout}

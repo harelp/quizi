@@ -90,7 +90,7 @@ const EditQuizDetails = props => {
               </p>
             </div>
             <div className="col s6 right-align">
-              <div className="col l2 s2 right">
+              <div className="col s2 right">
                 {isLoading ? (
                   <Loader />
                 ) : (
@@ -102,7 +102,7 @@ const EditQuizDetails = props => {
                   </button>
                 )}
               </div>
-              <div className="col l2 right">
+              <div className="col right">
                 <button
                   className="waves-effect black btn-small"
                   type="button"
