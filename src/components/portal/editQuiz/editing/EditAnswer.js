@@ -2,7 +2,6 @@ import React from 'react';
 import './editing.css';
 const EditAnswer = props => {
   const handleAnswer = evt => {
-    //props.setstate(false);
     props.setAnswersObj({
       ...props.answersObj,
       [evt.target.id]: evt.target.value

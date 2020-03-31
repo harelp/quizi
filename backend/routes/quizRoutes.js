@@ -3,8 +3,9 @@ const quizController = require('./../controllers/quizController');
 
 const router = express.Router();
 
-// router.param('id', tourController.checkID);
 router.get('/quiz/:id', quizController.getQuizByUser);
+router.patch('/updatePoints/:id', quizController.updatePoints);
+router.patch('/newPoints/:id', quizController.newPoints);
 router
   .route('/')
   .get(quizController.getAllQuizzes)
@@ -21,6 +22,5 @@ router
   .route('/:id/:cId')
   .patch(quizController.updateQuestionOnQuiz)
   .post(quizController.deleteQuestion);
-//     .delete();
 
 module.exports = router;

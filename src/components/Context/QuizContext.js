@@ -1,5 +1,6 @@
 import React, { useState, createContext } from 'react';
 import axios from 'axios';
+import shuffleHelper from './shuffleHelper';
 export const QuizContext = createContext();
 
 export function QuizProvider(props) {
@@ -13,14 +14,23 @@ export function QuizProvider(props) {
         `http://localhost:5000/api/v1/quizzes/${id}`
       );
       setQuiz(response.data);
-      setContent(response.data.content);
+      const suffled = shuffleHelper(response.data.content);
+      setContent(suffled);
     } catch (err) {
       console.log(err);
     }
   };
   return (
     <QuizContext.Provider
-      value={{ quiz, content, getQuiz, userQuiz, setUserQuiz }}
+      value={{
+        quiz,
+        content,
+        getQuiz,
+        userQuiz,
+        setUserQuiz,
+        setContent,
+        setQuiz
+      }}
     >
       {props.children}
     </QuizContext.Provider>

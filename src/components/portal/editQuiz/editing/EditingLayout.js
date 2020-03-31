@@ -29,7 +29,7 @@ const EditingLayout = props => {
     }
     fetchQuizz();
     return () => (isSubscribed = false);
-  }, []);
+  }, [props.quizId, setCurrQuiz]);
 
   const deleteQuiz = async () => {
     setIsloading(true);
@@ -109,7 +109,7 @@ const EditingLayout = props => {
 
       <div className="row">
         <div className="col s12">
-          <h5>Questions</h5>
+          <h6>Questions</h6>
         </div>
       </div>
 
@@ -118,7 +118,7 @@ const EditingLayout = props => {
           currQuiz.content.map(el => {
             return (
               <Card
-                key={el.question}
+                key={el.cId}
                 quizId={props.quizId}
                 element={el}
                 currQuiz={currQuiz}

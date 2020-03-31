@@ -33,12 +33,12 @@ const CreateLayout = props => {
           {step === 1 && stepOne}
           {step === 2 && stepTwo}
         </div>
-        <div className="row">
+        {/* <div className="row">
           <div className="col s12">
             ViewQuiz
-            {/* <ViewQuiz /> */}
+            
           </div>
-        </div>
+        </div> */}
       </div>
     </CqProvider>
   );

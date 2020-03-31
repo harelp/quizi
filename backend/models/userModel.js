@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema({
     maxlength: [20, 'NickName has more then 20 characters'],
     minlength: [1, 'NickName must be more than 1 character']
   },
+  secretCode: {
+    type: String,
+    required: true,
+    maxlength: 4,
+    minlength: 1
+  },
   email: {
     type: String,
     required: [true, 'Please provide your email'],

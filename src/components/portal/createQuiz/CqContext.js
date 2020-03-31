@@ -29,44 +29,6 @@ export const CqProvider = props => {
     setDetails(data);
   };
 
-  // const postData = () => {
-  //   const DATATOPOST = {
-  //     name: details.name.value,
-  //     description: details.description.value,
-  //     userId: details.userId,
-  //     private: details.private,
-  //     content: data
-  //   };
-  //   axios
-  //     .post(`${API_URL}/quizzes`, DATATOPOST)
-  //     .then(function(response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function(error) {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const postData = async () => {
-  //   const DATATOPOST = {
-  //     name: details.name.value,
-  //     description: details.description.value,
-  //     userId: 'details.userId',
-  //     content: data
-  //   };
-
-  //   try {
-  //     const response = await axios.post(`${API_URL}/quizzes`, DATATOPOST);
-
-  //     // localStorage.setItem('quiziToken', response.data.token);
-  //     console.log(response.data);
-  //     // secureUser(true);
-  //     // props.history.push('/profile');
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <CqContext.Provider
       value={{

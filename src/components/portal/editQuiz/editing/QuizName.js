@@ -7,6 +7,11 @@ const QuizName = () => {
       <div className="col s12">
         <h5>{currQuiz.name}</h5>
       </div>
+      <div className="col s12 left-align">
+        <h6>
+          <strong>Invite friends:</strong> quiz.com/invite?id={currQuiz._id}
+        </h6>
+      </div>
     </div>
   );
 };

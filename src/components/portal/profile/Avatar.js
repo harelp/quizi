@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 const Avatar = props => {
   const { nickName } = props.user;
-  //   const nickName = 'harel peri';
-  //   const email = 'harelperi2@gmail.com';
   return (
     <div className="row">
       <div className="col s8">

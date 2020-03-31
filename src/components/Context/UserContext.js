@@ -1,10 +1,11 @@
 import React, { useState, createContext } from 'react';
+import pointsHelper from './pointsHelper';
 export const UserContext = createContext();
 
 export function UserProvider(props) {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(undefined);
-  const [points, setPoints] = useState(null);
+  const [points, setPoints] = useState(0);
   const [curName, setCurName] = useState();
 
   const secureUser = bool => {
@@ -15,12 +16,10 @@ export function UserProvider(props) {
     setUser(val);
   };
 
-  const handlePoints = () => {
-    if (points === null) {
-      setPoints(1);
-    } else {
-      setPoints(points + 1);
-    }
+  const handlePoints = num => {
+    const timerPoints = Math.round(pointsHelper(num) + 0.4);
+    const totalPoints = points + timerPoints;
+    setPoints(totalPoints);
   };
 
   const handleCurName = value => {

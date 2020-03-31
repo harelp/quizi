@@ -11,7 +11,11 @@ const UnAuthSideNav = ({ children }) => {
       >
         <Link to="/">Quizi</Link>
       </li>
-
+      <li>
+        <Link to="/invite">
+          <strong>Join a Quizi</strong>
+        </Link>
+      </li>
       <li>
         <Link to="/login">Login</Link>
       </li>

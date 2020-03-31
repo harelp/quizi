@@ -13,7 +13,6 @@ const QuizLayout = props => {
   };
 
   const directToEdit = id => {
-    //props.history.push('/profile/editquiz');
     props.history.push({
       pathname: '/profile/editquiz',
       state: { id }
@@ -31,7 +30,7 @@ const QuizLayout = props => {
       }
     }
     fetchQuizzes();
-  }, []);
+  }, [user._id, setUserQuiz]);
 
   const checkData = userQuiz !== null;
   const quizList =

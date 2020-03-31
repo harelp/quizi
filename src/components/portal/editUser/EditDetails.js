@@ -10,7 +10,7 @@ const EditDetails = props => {
   const [nickName, setNickName] = useState(' ');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { user, setUserData } = useContext(UserContext);
+  const { user, setUserData, secureUser } = useContext(UserContext);
   useEffect(() => {
     if (email === ' ') {
       setEmail(user.email);
@@ -18,7 +18,7 @@ const EditDetails = props => {
     if (nickName === ' ') {
       setNickName(user.nickName);
     }
-  }, [email, nickName]);
+  }, [email, nickName, user.email, user.nickName]);
 
   const handleSubmit = async evt => {
     evt.preventDefault();
@@ -37,6 +37,25 @@ const EditDetails = props => {
       setUserData(response.data.user);
     } catch (error) {
       toast.error('Unauthorized, Contact Administrator');
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    setIsLoading(true);
+    if (window.confirm('Are you sure?')) {
+      try {
+        await axios.delete(`${API_URL}/users/${user._id}`);
+        toast.success('Account has been Deleted', {
+          onClose: () => {
+            secureUser(false);
+          }
+        });
+      } catch (error) {
+        toast.error('Unauthorized, Contact Administrator');
+        setIsLoading(false);
+      }
+    } else {
       setIsLoading(false);
     }
   };
@@ -77,6 +96,17 @@ const EditDetails = props => {
               required
             />
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col s12">
+          <a
+            className="right"
+            style={{ cursor: 'pointer' }}
+            onClick={!isLoading && handleDelete}
+          >
+            Delete Account?
+          </a>
         </div>
       </div>
       <div className="row">

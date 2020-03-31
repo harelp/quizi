@@ -12,6 +12,11 @@ const AuthSideNav = ({ children, onLogOut }) => {
         <Link to="/">Quizi</Link>
       </li>
       <li>
+        <Link to="/invite">
+          <strong>Join a Quizi</strong>
+        </Link>
+      </li>
+      <li>
         <Link to="/profile/quizzes">My Quizzes</Link>
       </li>
       <li>

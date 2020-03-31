@@ -16,6 +16,7 @@ const AddAnswer = props => {
             type="radio"
             required
             value={props.id}
+            checked={props.id === props.correctAns}
           />
           <span>Correct Asnswer?</span>
         </label>

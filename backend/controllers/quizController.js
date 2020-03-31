@@ -39,7 +39,10 @@ exports.createQuiz = async (req, res) => {
 exports.getQuiz = async (req, res) => {
   try {
     const quiz = await Quiz.findById(req.params.id);
-    res.status(201).json(quiz);
+    if (quiz === null) throw error;
+    else {
+      res.status(200).json(quiz);
+    }
   } catch (err) {
     res.status(404).json({
       status: 'fail',
@@ -146,6 +149,46 @@ exports.deleteQuestion = async (req, res) => {
     await Quiz.findByIdAndUpdate(
       req.params.id,
       { $pull: { content: { cId: req.params.cId } } },
+      { safe: true, upsert: true }
+    );
+    const quiz = await Quiz.findById(req.params.id);
+    res.status(201).json(quiz);
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
+};
+
+// Update Points
+exports.updatePoints = async (req, res) => {
+  const { playerId, points, playerName } = req.body;
+  try {
+    await Quiz.updateOne(
+      { 'leaderBoard.playerId': playerId },
+      {
+        $set: {
+          'leaderBoard.$.points': points,
+          'leaderBoard.$.playerName': playerName
+        }
+      }
+    );
+    const quiz = await Quiz.findById(req.params.id);
+    res.status(201).json(quiz);
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
+};
+
+exports.newPoints = async (req, res) => {
+  try {
+    await Quiz.findByIdAndUpdate(
+      req.params.id,
+      { $push: { leaderBoard: req.body } },
       { safe: true, upsert: true }
     );
     const quiz = await Quiz.findById(req.params.id);

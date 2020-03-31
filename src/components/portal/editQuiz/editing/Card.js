@@ -105,7 +105,6 @@ const Card = props => {
                 question={questionEdit}
                 setQuestionEdit={setQuestionEdit}
               />
-              {/* {answersObj !== '$@' && test} */}
 
               {answersObj !== '$@' &&
                 Object.keys(answersObj).map(el => {

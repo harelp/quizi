@@ -13,20 +13,19 @@ export default function sortArr(arr) {
   if (tempArr.length >= 10) {
     for (let i = 0; i < 9; i++) {
       sortedArr.push({
-        playerName: tempArr[i][0],
+        playerId: tempArr[i][0],
         points: tempArr[i][1],
-        playerId: tempArr[i][2]
+        playerName: tempArr[i][2]
       });
     }
   } else {
     for (let i = 0; i < tempArr.length; i++) {
       sortedArr.push({
-        playerName: tempArr[i][0],
+        playerId: tempArr[i][0],
         points: tempArr[i][1],
-        playerId: tempArr[i][2]
+        playerName: tempArr[i][2]
       });
     }
   }
-
   return sortedArr;
 }

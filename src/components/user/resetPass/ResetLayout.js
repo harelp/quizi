@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import ResetPass from './ResetPass';
 import ResetButtons from './ResetButtons';
-import './test.css';
+import './resetLayout.css';
 
 const API_URL = 'http://localhost:5000/api/v1';
 
@@ -11,6 +11,7 @@ const ResetLayout = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(0);
   const [email, setEmail] = useState('');
+  const [secretCode, setSecretCode] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -20,16 +21,17 @@ const ResetLayout = props => {
       try {
         setIsLoading(true);
         await axios.post(`${API_URL}/users/forgotPassword`, {
-          email
+          email,
+          secretCode
         });
-        toast.success('Email Found!', {
+        toast.success('User Found!', {
           onClose: () => {
             setStep(1);
             setIsLoading(false);
           }
         });
       } catch (error) {
-        toast.error('Incorrect Email', {
+        toast.error('Incorrect Email or Secret Code', {
           onClose: () => setIsLoading(false)
         });
       }
@@ -64,9 +66,9 @@ const ResetLayout = props => {
 
   return (
     <div className="container center">
-      <h3>Reset Password</h3>
+      <h5>Reset Password</h5>
       <div className="flex">
-        <form className="test" onSubmit={handleSubmit}>
+        <form className="resetContainer" onSubmit={handleSubmit}>
           <div className="row">
             <div className="input-field col s12">
               <input
@@ -79,6 +81,19 @@ const ResetLayout = props => {
                 onChange={evt => setEmail(evt.target.value)}
               />
               <label htmlFor="email">Email Address</label>
+            </div>
+            <div className="input-field col s12">
+              <input
+                id="secretCode"
+                type="text"
+                maxLength="4"
+                className="validate"
+                disabled={isLoading || step === 1}
+                required
+                value={secretCode}
+                onChange={evt => setSecretCode(evt.target.value)}
+              />
+              <label htmlFor="secretCode">Secret Code</label>
             </div>
           </div>
           {step === 1 && (

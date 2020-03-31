@@ -35,6 +35,11 @@ const AuthNav = ({ children, onLogOut }) => {
         </Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
+            <Link to="/invite">
+              <strong>Join a Quizi</strong>
+            </Link>
+          </li>
+          <li>
             <Link to="/profile/quizzes">
               <strong>My Quizzes</strong>
             </Link>

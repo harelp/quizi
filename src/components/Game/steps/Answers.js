@@ -25,7 +25,12 @@ export default function Answers(props) {
   const handleAnswer = ans => {
     const userAnswer = ans === content[props.qNum].correctAns;
     setAnswer(userAnswer);
-    userAnswer && props.onCalc();
+    userAnswer && props.onCalc(timer);
+    if (timer > 0) {
+      setTimeout(() => {
+        props.onReset();
+      }, 1000);
+    }
   };
 
   const answers = content[props.qNum].answers;

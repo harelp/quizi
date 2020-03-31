@@ -11,7 +11,7 @@ export default function Nav(props) {
   const { isAuth, secureUser } = useContext(UserContext);
   useEffect(() => {
     const elems = document.querySelectorAll('.sidenav');
-    const instances = M.Sidenav.init(elems, {});
+    M.Sidenav.init(elems, {});
     let elem = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elem, {});
   }, []);
@@ -22,7 +22,7 @@ export default function Nav(props) {
   return (
     <React.Fragment>
       <nav>
-        <div className="nav-wrapper white black-text">
+        <div className="nav-wrapper indigo darken-3 white-text">
           {isAuth ? <AuthNav onLogOut={handleLogOut} /> : <UnAuthNav />}
         </div>
         <ul className="sidenav" id="mobile-demo">

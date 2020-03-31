@@ -19,9 +19,10 @@ const Play = props => {
   const [name, setName] = useState('');
   const [qNum, setqNum] = useState(0);
 
-  // prevents refresh
   const handleSubmit = evt => {
     evt.preventDefault();
+    content === null && alert('Please enter a Quizi Pin');
+    content === null && props.startHanlder();
     handleCurName(name);
     setStep(1);
   };
@@ -37,8 +38,8 @@ const Play = props => {
     setStep(0);
   };
   // helly's code
-  const handleCalc = () => {
-    handlePoints();
+  const handleCalc = num => {
+    handlePoints(num);
   };
 
   // reset's step
@@ -58,7 +59,12 @@ const Play = props => {
   );
   const stepOne = <Question qNum={qNum} onUpdate={handleUpdate} />;
   const stepTwo = (
-    <Answers qNum={qNum} onCalc={handleCalc} onReset={handleReset} />
+    <Answers
+      qNum={qNum}
+      onCalc={handleCalc}
+      onReset={handleReset}
+      setStep={setStep}
+    />
   );
   const stepDefault = (
     <GameEnd restart={handleRestart} redirect={props.redirect} />

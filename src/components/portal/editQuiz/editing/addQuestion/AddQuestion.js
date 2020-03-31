@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import uuid from 'react-uuid';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -22,13 +22,6 @@ const AddQuestion = props => {
     ans2: '',
     ans3: ''
   });
-
-  useEffect(() => {
-    console.log('i ran');
-    return () => {
-      console.log('rang agin');
-    };
-  }, []);
 
   const questionTag = true;
 
@@ -59,7 +52,7 @@ const AddQuestion = props => {
         onClose: () => {
           setCurrQuiz(response.data);
           setQuestion('');
-          setCorrectAns('');
+          setCorrectAns(undefined);
           setAnsObj({
             ans0: '',
             ans1: '',
