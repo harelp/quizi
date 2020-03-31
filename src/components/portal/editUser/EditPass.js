@@ -2,18 +2,19 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { UserContext } from './../../Context/UserContext';
-
+import Loader from '../../Loader';
 const API_URL = 'http://localhost:5000/api/v1';
 
 const EditPass = props => {
   const [currPassword, setcurrPassword] = useState('');
   const [password, setpassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
   const { user, setUserData } = useContext(UserContext);
 
   const handleSubmit = async evt => {
     evt.preventDefault();
+    setIsLoading(true);
     const passMatch = password === confirmPassword;
     if (!passMatch) {
       alert("Password's don't match");
@@ -26,14 +27,20 @@ const EditPass = props => {
           confirmPassword
         });
         toast.success('Password Changed', {
-          onClose: () => props.onRouteChange()
+          onClose: () => setIsLoading(false)
         });
         setUserData(response.data.user);
+        setpassword('');
+        setconfirmPassword('');
+        setIsLoading('');
       } catch (error) {
         toast.error('Incorrect Password!');
+        setIsLoading(false);
       }
     }
   };
+
+  const btn = <button className="waves-effect red btn-small">Save</button>;
 
   return (
     <form className="container" onSubmit={handleSubmit}>
@@ -46,6 +53,7 @@ const EditPass = props => {
               type="password"
               className="validate"
               value={currPassword}
+              disabled={isLoading}
               onChange={evt => setcurrPassword(evt.target.value)}
               required
             />
@@ -62,6 +70,7 @@ const EditPass = props => {
               minLength="8"
               className="validate"
               value={password}
+              disabled={isLoading}
               onChange={evt => setpassword(evt.target.value)}
               required
             />
@@ -74,6 +83,7 @@ const EditPass = props => {
               className="validate"
               minLength="8"
               value={confirmPassword}
+              disabled={isLoading}
               onChange={evt => setconfirmPassword(evt.target.value)}
               required
             />
@@ -87,12 +97,13 @@ const EditPass = props => {
               type="button"
               onClick={() => props.onStepChange(0)}
               className="waves-effect black btn-small"
+              disabled={isLoading}
             >
               Change Details
             </button>
           </div>
           <div className="col l6 s4 right-align">
-            <button className="waves-effect red btn-small">Save</button>
+            {isLoading ? <Loader /> : btn}
           </div>
         </div>
       </div>

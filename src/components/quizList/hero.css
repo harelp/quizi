@@ -1,0 +1,28 @@
+.hero {
+  height: 450px;
+  width: 100%;
+  position: relative;
+  background: #3949ab;
+  background-image: url('../../images/hero.png');
+  background-position: bottom right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 0;
+}
+
+@media only screen and (max-width: 700px) {
+  .hero {
+    background-size: cover;
+    background-image: url('../../images/heroMob.png');
+  }
+}

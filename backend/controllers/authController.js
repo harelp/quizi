@@ -15,6 +15,7 @@ const signToken = id => {
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     nickName: req.body.nickName,
+    secretCode: req.body.secretCode,
     email: req.body.email,
     password: req.body.password,
     confirmPassword: req.body.confirmPassword
@@ -52,16 +53,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // if every thing okay, send token to client
-
   const token = signToken(user._id);
-  // res.cookie('jwt', token, {
-  //   // converting 90 dats to milliseconds                90            h    m    s      ms
-  //   expires: new Date(
-  //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-  //   ),
-  //   secure: true, // https only
-  //   httpOnly: true
-  // });
   user.password = undefined;
   res.status(200).json({
     token,
@@ -71,16 +63,19 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
+  let matches;
+  if (user && user.secretCode === req.body.secretCode) {
+    return res.status(200).json({
+      message: 'success'
+    });
+  }
 
-  if (!user) {
+  if (!user || !matches) {
     return res.status(404).json({
       status: 'fail',
       message: 'There is no user with this email address'
     });
   }
-  res.status(200).json({
-    message: 'HAHA'
-  });
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {

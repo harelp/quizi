@@ -9,16 +9,8 @@ const EditUserLayout = props => {
     setStep(num);
   };
 
-  const handleRoute = () => {
-    props.history.push('/profile');
-  };
-
-  const editDetails = (
-    <EditDetails onStepChange={handleStep} onRouteChange={handleRoute} />
-  );
-  const editPassword = (
-    <EditPass onStepChange={handleStep} onRouteChange={handleRoute} />
-  );
+  const editDetails = <EditDetails onStepChange={handleStep} />;
+  const editPassword = <EditPass onStepChange={handleStep} />;
 
   return (
     <div className="container">
@@ -33,24 +25,6 @@ const EditUserLayout = props => {
       </div>
     </div>
   );
-
-  // switch (step) {
-  //   case 0:
-  //     return (
-  //       <div className="container">
-  //         <div className="EditLayout">{editDetails}</div>
-  //       </div>
-  //     );
-
-  //   case 1:
-  //     return (
-  //       <div className="container">
-  //         <div className="EditLayout">{editPassword}</div>
-  //       </div>
-  //     );
-  //   default:
-  //     break;
-  // }
 };
 
 export default EditUserLayout;

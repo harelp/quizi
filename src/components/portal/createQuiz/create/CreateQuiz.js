@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import uuid from 'react-uuid';
 import CreateBox from './CreateBox';
 import { CqContext } from '../CqContext';
 
@@ -42,6 +43,7 @@ const CreateQuiz = props => {
     });
 
     const content = {
+      cId: uuid(),
       question: question.value,
       answers: ansArray,
       correctAns: radio

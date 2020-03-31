@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 
 import { QuizProvider } from './components/Context/QuizContext';
@@ -14,8 +16,10 @@ import Register from './components/user/Register';
 import Login from './components/user/Login';
 import ResetLayout from './components/user/resetPass/ResetLayout';
 import PortalLayout from './components/portal/PortalLayout';
+import QuizLayout from './components/portal/quiz/QuizLayout';
 import CreateLayout from './components/portal/createQuiz/CreateLayout';
 import EditUserLayout from './components/portal/editUser/EditUserLayout';
+import EditQuizLayout from './components/portal/editQuiz/EditQuizLayout';
 
 toast.configure({
   position: 'top-right',
@@ -46,16 +50,21 @@ class App extends Component {
                 path="/profile/create"
                 component={CreateLayout}
               />
-              <Route
+              <ProtectedRoute
                 exact
-                path="/profile/editUser"
+                path="/profile/edituser"
                 component={EditUserLayout}
               />
-              {/* <ProtectedRoute
+              <ProtectedRoute
                 exact
-                path="/profile/editUser"
-                component={EditUserLayout}
-              /> */}
+                path="/profile/quizzes"
+                component={QuizLayout}
+              />
+              <ProtectedRoute
+                exact
+                path="/profile/editquiz"
+                component={EditQuizLayout}
+              />
             </Switch>
           </Router>
         </QuizProvider>

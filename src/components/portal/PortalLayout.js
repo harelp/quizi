@@ -4,7 +4,7 @@ import Profile from './profile/Profile';
 import Avatar from './profile/Avatar';
 import Stats from './userStats/Stats';
 import './PortalLayout.css';
-const PortalLayout = () => {
+const PortalLayout = props => {
   const { user } = useContext(UserContext);
   return (
     <div className="container">

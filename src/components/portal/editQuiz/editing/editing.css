@@ -1,0 +1,9 @@
+.iconHover:hover {
+  color: #3949ab;
+  transition: 0.3s all ease-in-out;
+  cursor: pointer;
+}
+
+.row .ansHeight {
+  height: 76px !important;
+}

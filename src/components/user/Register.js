@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { UserContext } from './../Context/UserContext';
+import Loader from '../Loader';
 import './User.css';
 
 const API_URL = 'http://localhost:5000/api/v1';
@@ -15,7 +16,7 @@ const Register = props => {
     evt.preventDefault();
     const isInputObj = Object.keys(input).length > 0;
     if (isInputObj) {
-      const { nickName, email, password, confirmPassword } = input;
+      const { nickName, email, password, confirmPassword, secretCode } = input;
 
       const register = password === confirmPassword;
 
@@ -26,6 +27,7 @@ const Register = props => {
           setIsLoading(true);
           const response = await axios.post(`${API_URL}/users/signup`, {
             nickName,
+            secretCode,
             email,
             password,
             confirmPassword
@@ -52,22 +54,6 @@ const Register = props => {
     setInput({ ...input, [evt.target.id]: evt.target.value });
   };
 
-  const loader = (
-    <div className="preloader-wrapper small active">
-      <div className="spinner-layer spinner-green-only">
-        <div className="circle-clipper left">
-          <div className="circle"></div>
-        </div>
-        <div className="gap-patch">
-          <div className="circle"></div>
-        </div>
-        <div className="circle-clipper right">
-          <div className="circle"></div>
-        </div>
-      </div>
-    </div>
-  );
-
   const btn = (
     <div className="input-field">
       <button className="btn waves-effect indigo btn-medium" type="submit">
@@ -78,7 +64,7 @@ const Register = props => {
 
   return (
     <div className="container center">
-      <h3>Register</h3>
+      <h5>Register</h5>
       <div className="row" style={{ marginTop: '25px' }}>
         <form
           className="col s12"
@@ -94,6 +80,19 @@ const Register = props => {
           <div className="row">
             <div className="input-field col s12">
               <input
+                id="email"
+                type="email"
+                className="validate"
+                required
+                disabled={isLoading}
+                onChange={handleChange}
+              />
+              <label htmlFor="email">Email Address</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s6">
+              <input
                 id="nickName"
                 type="text"
                 className="validate"
@@ -105,20 +104,21 @@ const Register = props => {
               />
               <label htmlFor="nickName">Nick Name</label>
             </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
+            <div className="input-field col s6">
               <input
-                id="email"
-                type="email"
+                id="secretCode"
+                type="text"
                 className="validate"
+                minLength="1"
+                maxLength="4"
                 required
                 disabled={isLoading}
                 onChange={handleChange}
               />
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="secretCode">Secret Code</label>
             </div>
           </div>
+
           <div className="row">
             <div className="input-field col s6">
               <input
@@ -146,7 +146,7 @@ const Register = props => {
             </div>
           </div>
           <div className="row center">
-            <div className="flexbox">{isLoading ? loader : btn}</div>
+            <div className="flexbox">{isLoading ? <Loader /> : btn}</div>
           </div>
         </form>
       </div>
